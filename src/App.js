@@ -17,22 +17,6 @@ export default () => (
       `}
       </style>
     </header>
-    <CustomGraphiQL 
-        fetcher={async graphQLParams => {
-          const data = await fetch(
-            'https://swapi.graph.cool',
-            {
-              method: 'POST',
-              headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(graphQLParams),
-              credentials: 'same-origin',
-            },
-          );
-          return data.json().catch(() => data.text());
-        }}
-    />
+    <CustomGraphiQL />
   </Fragment>
 );

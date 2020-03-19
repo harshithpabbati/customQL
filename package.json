@@ -13,6 +13,7 @@
     "graphiql": "0.17.5",
     "graphql": "14.6.0",
     "lodash": "4.17.15",
+    "prop-types": "^15.7.2",
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "react-scripts": "3.0.1"

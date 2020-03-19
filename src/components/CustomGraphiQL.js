@@ -2,11 +2,14 @@ import React, { Component, Fragment } from "react";
 import GraphiQL from "graphiql";
 import copyToClipboard from 'copy-to-clipboard';
 import { pick, pickBy } from "lodash";
+import {buildClientSchema, introspectionQuery} from "graphql";
 
 const defaultState = {
   editorTheme: undefined,
   query: undefined,
-  variables: undefined
+  variables: undefined,
+  graphQLEndpoint: '',
+  response: ''
 };
 
 const stateFromURL = Array.from(
@@ -88,6 +91,60 @@ export default class CustomGraphiQL extends Component {
     copyToClipboard(query);
   };
 
+  handleInputKeyPress = event => {
+    if (event.which === 13) {
+      if (this.urlInputRef) {
+        this.urlInputRef.blur();
+      }
+      this.handleFetchSchema();
+      event.preventDefault();
+      return false;
+    }
+
+    return true;
+  };
+
+  setURLInputRef = ref => {
+    this.urlInputRef = ref;
+  };
+
+  handleURLChange = url => {
+    const graphQLParams = { query: introspectionQuery };
+    return fetch(url, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(graphQLParams)
+    })
+        .then(response => response.json())
+        .then(result => {
+          if (result.errors) {
+            throw new Error(JSON.stringify(result.errors));
+          }
+          const schema = buildClientSchema(result.data);
+          this.setState({
+            schema,
+            graphQLEndpoint: url,
+            schemaFetchError: '',
+            response: 'Schema fetched'
+          });
+        })
+        .catch(error => {
+          // eslint-disable-next-line no-console
+          console.error('Error in fetching GraphQL schema', error);
+          this.setState({
+            schemaFetchError: error.toString(),
+            graphQLEndpoint: url,
+            response: error.toString()
+          });
+        });
+  };
+
+  handleFetchSchema = () => {
+    this.handleURLChange(this.urlInputRef.value);
+  };
+
   componentDidUpdate(prevProps, prevState) {
     const { editorTheme = "graphiql" } = this.state;
     const queryString = new URLSearchParams(pickBy(this.state)).toString();
@@ -105,8 +162,7 @@ export default class CustomGraphiQL extends Component {
   }
 
   render() {
-    console.log(this.ref)
-    const { editorTheme, query, variables } = this.state;
+    const { editorTheme, query, variables, schema, response, graphQLEndpoint } = this.state;
     return (
       <Fragment>
         <header>
@@ -147,19 +203,46 @@ export default class CustomGraphiQL extends Component {
             rel="stylesheet"
           />
         </header>
-
         <GraphiQL
           editorTheme={editorTheme}
-          fetcher={this.props.fetcher}
+          schema={schema}
+          fetcher={async graphQLParams => {
+            const data = await fetch(
+                this.state.graphQLEndpoint,
+                {
+                  method: 'POST',
+                  headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(graphQLParams),
+                  credentials: 'same-origin',
+                },
+            );
+            return data.json().catch(() => data.text());
+          }}
           query={query}
           variables={variables}
           onEditQuery={this.handleEditQuery}
           onEditVariables={this.handleEditVariables}
           ref={this.ref}
+          response={response}
         >
           <GraphiQL.Logo>CustomQL</GraphiQL.Logo>
 
           <GraphiQL.Toolbar>
+            <form onSubmit={this.handleFetchSchema}>
+              <div>
+                <input
+                    ref={this.setURLInputRef}
+                    className="url-input"
+                    type={'text'}
+                    placeholder={'GraphQL Endpoint'}
+                    defaultValue={graphQLEndpoint || ''}
+                    onKeyPress={this.handleInputKeyPress}
+                />
+              </div>
+            </form>
             <GraphiQL.Button
               onClick={this.handlePrettifyQuery}
               label="Prettify"
