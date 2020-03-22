@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import GraphiQL from "graphiql";
 import copyToClipboard from 'copy-to-clipboard';
 import { pick, pickBy } from "lodash";
-import {buildClientSchema, introspectionQuery} from "graphql";
+import { buildClientSchema, introspectionQuery, printSchema } from "graphql";
 
 const defaultState = {
   editorTheme: undefined,
@@ -125,6 +125,7 @@ export default class CustomGraphiQL extends Component {
           const schema = buildClientSchema(result.data);
           this.setState({
             schema,
+            schemaSDL: printSchema(schema),
             graphQLEndpoint: url,
             schemaFetchError: '',
             response: 'Schema fetched'
@@ -144,6 +145,9 @@ export default class CustomGraphiQL extends Component {
   handleFetchSchema = () => {
     this.handleURLChange(this.urlInputRef.value);
   };
+  handleSchemaSDL = () => {
+    this.state.schemaSDL ? alert(this.state.schemaSDL): alert('Enter valid URL')
+  }
 
   componentDidUpdate(prevProps, prevState) {
     const { editorTheme = "graphiql" } = this.state;
@@ -257,6 +261,12 @@ export default class CustomGraphiQL extends Component {
               onClick={this.handleToggleHistory}
               label="History"
               title="Query History"
+            />
+
+            <GraphiQL.Button
+              onClick={this.handleSchemaSDL}
+              label="Schema SDL"
+              title="Schema SDL"
             />
 
             <GraphiQL.Select onSelect={editorTheme => this.setState({ editorTheme })}>
