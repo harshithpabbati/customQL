@@ -1,0 +1,281 @@
+.graphiql
+  flex: 1
+
+  &.graphiql-tab
+    .docExplorerWrap
+      .doc-explorer
+        background: #183144
+
+        .doc-explorer-title-bar
+          background: #183144
+          color: #dadada
+
+          .doc-explorer-back
+            color: #dadada
+
+            &:before
+              border-color: #dadada
+
+        .doc-explorer-contents
+          background: #183144
+          color: #dadada
+          border: none
+
+          .search-box
+            width: 100%
+            border: none
+            padding: 15px 0px 20px
+
+            &:before
+              left: 10px
+              top: 19px
+
+            .search-box-clear
+              background: #d46a6a
+              top: 27px
+              right: 10px
+
+            input
+              box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23)
+              width: 100%
+              border: none
+              padding-left: 35px
+              color: #dadada
+              background: #1f3546
+              outline: none
+              height: 40px
+
+          .doc-category
+            .keyword
+              color: #d46a6a
+
+            .type-name
+              color: #f1fa8c
+
+            .field-name
+              color: #2a72ad
+
+    .topBarWrap
+      position: relative
+      overflow: visible !important
+
+      .docExplorerShow
+        border: none
+        box-shadow: none
+        color: rgba(255, 255, 255, 0.726)
+        position: absolute
+        right: -51px
+        transform: rotate(-90deg)
+        top: 270px
+        padding: 7px 51px
+        background: #0f202d
+        z-index: 999
+        border-radius: 5px 5px 0px 0px
+        font-weight: bold
+        font-size: 16px
+        &:before
+          display: none
+
+      .topBar
+        background: #172b3a
+        border: none
+        position: relative
+        padding: 20px
+
+        .execute-button-wrap
+          margin: 0px 7px 0px 0px
+          height: 60px
+          width: 60px
+
+          .execute-button
+            border: none
+            box-shadow: none
+            background: #0f202d
+            height: 100%
+            width: 100%
+            position: relative
+            color: #fff
+            font-size: 24px
+            font-weight: bold
+
+            &.timmer-active
+              color: green
+
+              &:before
+                display: none
+
+            &.timmer-red
+              color: red
+
+            &:before
+              position: absolute
+              content: ''
+              top: 50%
+              left: 50%
+              transform: translate(-35%, -50%)
+              width: 0
+              height: 0
+              border-style: solid
+              border-width: 12px 0 12px 16px
+              border-color: transparent transparent transparent rgba(255, 255, 255, 0.6)
+
+            svg
+              display: none
+
+        .toolbar
+          width: 100%
+
+          .toolbar-button
+            background: #0f202d
+            border: none
+            outline: none
+            box-shadow: none
+            padding: 6px 30px
+            color: rgba(255, 255, 255, 0.6)
+            display: flex
+            align-items: center
+            justify-content: center
+            border-radius: 5px
+
+    .query-editor
+      .CodeMirror
+        background: #0f202d !important
+
+    .variable-editor
+      min-height: 100px
+
+      .variable-editor-title
+        background: #0b1924
+        border: none
+        font-size: 18px
+        font-weight: lighter
+
+    .resultWrap
+      border-left: 3px solid #172b3a
+
+    .result-window
+      .CodeMirror-vscrollbar
+        right: 5px
+
+      .CodeMirror
+        background: #172b3a !important
+
+  .cm-s-dracula
+    font-size: 18px
+
+    .CodeMirror-gutters
+      color: #282a36
+
+    .CodeMirror-cursor
+      border-left: solid thin #f8f8f0
+
+    .CodeMirror-linenumber
+      color: #6d8a88
+
+    .CodeMirror-selected
+      background: rgba(255, 255, 255, 0.10)
+
+    span
+      &.cm-comment
+        color: #6272a4
+
+      &.cm-number
+        color: #bd93f9
+
+      &.cm-variable
+        color: #50fa7b
+
+      &.cm-variable-2
+        color: white
+
+      &.cm-def
+        color: #50fa7b
+
+      &.cm-operator
+        color: #ff79c6
+
+      &.cm-keyword
+        color: #ff79c6
+
+      &.cm-atom
+        color: #bd93f9
+
+      &.cm-meta
+        color: #f8f8f2
+
+      &.cm-tag
+        color: #ff79c6
+
+      &.cm-attribute
+        color: #50fa7b
+
+      &.cm-qualifier
+        color: #50fa7b
+
+      &.cm-property
+        color: #66d9ef
+
+      &.cm-builtin
+        color: #50fa7b
+
+      &.cm-variable-3
+        color: #ffb86c
+
+    .CodeMirror-activeline-background
+      background: rgba(255, 255, 255, 0.1)
+
+    .CodeMirror-matchingbracket
+      text-decoration: underline
+      color: white !important
+.graphiql.graphiql-tab .query-editor .CodeMirror-scroll, .graphiql.graphiql-tab .query-editor .CodeMirror-gutters
+  background: #0f202d !important
+
+.graphiql.graphiql-tab .variable-editor .CodeMirror-scroll, .graphiql.graphiql-tab .variable-editor .CodeMirror-gutters
+  background: #0b1924 !important
+
+.graphiql.graphiql-tab .result-window .CodeMirror-scroll, .graphiql.graphiql-tab .result-window .CodeMirror-gutters
+  background: #172b3a !important
+
+.graphiql .cm-s-dracula.CodeMirror, .graphiql .cm-s-dracula .CodeMirror-gutters
+  background-color: #282a36 !important
+  color: #f8f8f2 !important
+  border: none
+
+.graphiql .cm-s-dracula .CodeMirror-line::selection, .graphiql .cm-s-dracula .CodeMirror-line > span::selection, .graphiql .cm-s-dracula .CodeMirror-line > span > span::selection
+  background: rgba(255, 255, 255, 0.10)
+
+.graphiql .cm-s-dracula .CodeMirror-line::-moz-selection, .graphiql .cm-s-dracula .CodeMirror-line > span::-moz-selection, .graphiql .cm-s-dracula .CodeMirror-line > span > span::-moz-selection
+  background: rgba(255, 255, 255, 0.10)
+
+.graphiql .cm-s-dracula span.cm-string, .graphiql .cm-s-dracula span.cm-string-2
+  color: #f1fa8c
+
+.CodeMirror-info
+  color: #dadada !important
+  background: #142736 !important
+
+.CodeMirror-lint-tooltip
+  color: #dadada !important
+  background: #142736 !important
+
+.CodeMirror-hints
+  background: #172b3a
+
+  .CodeMirror-hint
+    color: #dadada
+    padding: 7px
+    border: none
+
+    &:hover
+      background: #142736
+
+  .CodeMirror-hint-active
+    background: #102d42
+
+  .CodeMirror-hint-information
+
+    .content
+      color: #dadada
+
+      .infoType
+        color: #f1fa8c

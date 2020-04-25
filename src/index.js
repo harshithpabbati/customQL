@@ -1,7 +1,12 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import App from "./App";
+import CustomGraphiQL from './components/CustomGraphiQL';
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
+const root = document.createElement('div');
+root.id = 'root_graphiql';
+document.body.appendChild(root);
+
+ReactDOM.render(<CustomGraphiQL endpoints={[{
+    route: 'https://swapi-graphql.netlify.app/.netlify/functions/index'
+}]} />, root);
