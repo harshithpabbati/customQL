@@ -7,6 +7,7 @@ import GraphiQlSettings from './GraphiQlSettings.jsx';
 import { AppContext } from './CustomGraphiQL.jsx';
 import GraphiQlHistory from './GraphiQlHistory.jsx';
 import GraphiQlFooter from './GraphiQlFooter.jsx';
+import GraphiQlExport from './GraphiQlExport';
 import toast from './../helpers/toast.jsx';
 
 import 'graphiql/graphiql.css';
@@ -24,7 +25,7 @@ const GraphiQlTab = ({ activeTab, endpoints }) => {
   };
 
   const beforeFetch = () => {
-    toast.info('Fetching...')
+    toast.info('Fetching...');
   };
 
   const afterFetch = (response) => {
@@ -53,47 +54,37 @@ const GraphiQlTab = ({ activeTab, endpoints }) => {
   };
 
   const copyCURL = () => {
-    if(activeTab.query) {
+    if (activeTab.query) {
       let curl = `curl '${
-          activeTab.route || window.location.origin
+        activeTab.route || window.location.origin
       }' -H 'Content-Type: application/json' -H 'Accept: application/json'`;
       if (activeTab.headers.length > 0) {
-        activeTab.headers.forEach(header => {
+        activeTab.headers.forEach((header) => {
           curl = curl + `' -H ' + '${header.name}: ${header.value}'`;
         });
       }
-      curl = curl + `-H 'Origin: ${
+      curl =
+        curl +
+        `-H 'Origin: ${
           activeTab.route || window.location.origin
-      }' --data-binary '{"query":${JSON.stringify(activeTab.query)}}' --compressed`;
+        }' --data-binary '{"query":${JSON.stringify(
+          activeTab.query
+        )}}' --compressed`;
 
       if (!navigator.clipboard) {
         toast.info('Could not copy curl!');
       } else {
         navigator.clipboard.writeText(curl).then(
-            function () {
-              toast.info('Successfully copied to clipboard!');
-            },
-            function (err) {
-              toast.info('Could not copy cURL: ', err);
-            }
+          function () {
+            toast.info('Successfully copied to clipboard!');
+          },
+          function (err) {
+            toast.info('Could not copy cURL: ', err);
+          }
         );
       }
-    }else{
+    } else {
       toast.info('You need a query to copy cURL command');
-    }
-  };
-
-  const exportJSON = () => {
-    if(activeTab.response) {
-      let parseJSON = JSON.parse(activeTab.response);
-      let jsonStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(parseJSON, 0, 4));
-      let a = document.createElement('a');
-      a.href = 'data:' + jsonStr;
-      a.download = activeTab.title + '.json';
-      a.innerHTML = 'download JSON';
-      a.click();
-    }else {
-      toast.info('Response tab is empty')
     }
   };
 
@@ -117,12 +108,12 @@ const GraphiQlTab = ({ activeTab, endpoints }) => {
 
   const copyQuery = () => {
     navigator.clipboard.writeText(activeTab.query).then(
-        function () {
-          toast.info('Successfully copied query to clipboard!');
-        },
-        function (err) {
-          toast.info('Could not copy query: ', err);
-        }
+      function () {
+        toast.info('Successfully copied query to clipboard!');
+      },
+      function (err) {
+        toast.info('Could not copy query: ', err);
+      }
     );
   };
 
@@ -157,17 +148,15 @@ const GraphiQlTab = ({ activeTab, endpoints }) => {
         response={activeTab.response || ''}
         variables={activeTab.variables || ''}
       >
-        <GraphiQL.Logo>
-          {' '}
-        </GraphiQL.Logo>
+        <GraphiQL.Logo> </GraphiQL.Logo>
         <GraphiQL.Toolbar>
           <GraphiQL.Button onClick={prettifySchema} label="Prettify" />
           <GraphiQL.Button onClick={copyQuery} label="Copy" />
           <GraphiQL.Button onClick={clearTabs} label="Clear" />
           <GraphiQlHistory activeTab={activeTab} />
           <GraphiQlSearch activeTab={activeTab} endpoints={endpoints || []} />
-          <GraphiQL.Button onClick={exportJSON} label="Export JSON" />
           <GraphiQL.Button onClick={copyCURL} label="Copy cURL" />
+          <GraphiQlExport activeTab={activeTab} />
           <GraphiQlSettings />
         </GraphiQL.Toolbar>
         <GraphiQL.Footer>
