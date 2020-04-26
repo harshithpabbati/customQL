@@ -6,7 +6,6 @@ import exportImage from '../images/export.png';
 
 const GraphiQlExport = ({ activeTab }) => {
   let [dropdownOpen, openDropdown] = useState(false);
-  console.log(dropdownOpen);
   useEffect(() => {
     const onClickOutsideDropdown = () => {
       if (dropdownOpen) openDropdown(false);

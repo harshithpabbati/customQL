@@ -1,12 +1,13 @@
 {
   "name": "customql",
-  "version": "1.0.0",
-  "description": "Custom GraphQL",
+  "version": "1.0.2",
+  "description": "Custom GraphQL IDE",
   "keywords": [
     "react",
     "GraphQL"
   ],
   "main": "src/index.js",
+  "license": "MIT",
   "dependencies": {
     "codemirror": "5.52.0",
     "copy-to-clipboard": "^3.3.1",
@@ -26,6 +27,14 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harshithpabbati/customql.git"
+  },
+  "bugs": {
+    "url": "https://github.com/harshithpabbati/customql/issues"
+  },
+  "homepage": "https://github.com/harshithpabbati/customql#readme",
   "browserslist": [
     ">0.2%",
     "not dead",

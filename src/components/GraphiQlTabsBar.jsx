@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { AppContext } from './CustomGraphiQL.jsx';
 import '../styles/GraphiQltabsBar.sass';
+import GraphiQlSettings from './GraphiQlSettings.jsx';
 
 const GraphiQlTabsBar = () => {
   const { state, dispatch } = useContext(AppContext);
@@ -67,6 +68,9 @@ const GraphiQlTabsBar = () => {
           )}
         </div>
       ))}
+      <div className="graphiql-settings">
+        <GraphiQlSettings />
+      </div>
     </div>
   );
 };

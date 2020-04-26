@@ -3,7 +3,6 @@ import GraphiQL from 'graphiql';
 import { parse, print } from 'graphql';
 import graphQLFetcher from './../helpers/graphiQLFetcher.jsx';
 import GraphiQlSearch from './GraphiQlSearch.jsx';
-import GraphiQlSettings from './GraphiQlSettings.jsx';
 import { AppContext } from './CustomGraphiQL.jsx';
 import GraphiQlHistory from './GraphiQlHistory.jsx';
 import GraphiQlFooter from './GraphiQlFooter.jsx';
@@ -157,7 +156,6 @@ const GraphiQlTab = ({ activeTab, endpoints }) => {
           <GraphiQlSearch activeTab={activeTab} endpoints={endpoints || []} />
           <GraphiQL.Button onClick={copyCURL} label="Copy cURL" />
           <GraphiQlExport activeTab={activeTab} />
-          <GraphiQlSettings />
         </GraphiQL.Toolbar>
         <GraphiQL.Footer>
           <GraphiQlFooter activeTab={activeTab} />
