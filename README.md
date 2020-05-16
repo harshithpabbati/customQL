@@ -9,7 +9,7 @@
 - Copy cURL command
 - Tabs
 - Settings
-  _ Sync data with localstorage
-  _ Max number of queries in history
+  - Sync data with localstorage
+  - Max number of queries in history
 - Add Custom Headers
 - Clear option
