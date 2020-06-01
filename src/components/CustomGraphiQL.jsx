@@ -310,7 +310,7 @@ const reducer = (state = initialState, action) => {
 };
 
 export const AppContext = React.createContext(undefined, undefined);
-const CustomGraphiQL = ({ endpoints }) => {
+const CustomQL = ({ endpoints }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   useEffect(() => {
     defaultTabValues = { ...defaultTabValues, route: endpoints[0].route };
@@ -343,4 +343,4 @@ const CustomGraphiQL = ({ endpoints }) => {
   );
 };
 
-export default CustomGraphiQL;
+export default CustomQL;
