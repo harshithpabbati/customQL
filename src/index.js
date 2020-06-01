@@ -346,6 +346,6 @@ const CustomQL = ({ endpoints }) => {
 };
 
 ReactDOM.render(
-  <CustomQL endpoints={this? this.props.endpoints: ['https://swapi-graphql.netlify.app/.netlify/functions/index']}/>,
+  <CustomQL endpoints={['https://swapi-graphql.netlify.app/.netlify/functions/index']}/>,
   document.getElementById('root')
 );
