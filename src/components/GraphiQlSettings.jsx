@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { AppContext } from './CustomGraphiQL.jsx';
+import { AppContext } from '../index';
 
 import '../styles/GraphiQlSettings.sass';
 import settings from '../images/settings.png';

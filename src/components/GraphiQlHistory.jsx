@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
 import GraphiQL from 'graphiql';
-import { AppContext } from './CustomGraphiQL.jsx';
+import { AppContext } from '../index';
 
 import '../styles/GraphiQlHistory.sass';
 

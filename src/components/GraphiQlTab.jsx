@@ -3,7 +3,7 @@ import GraphiQL from 'graphiql';
 import { parse, print } from 'graphql';
 import graphQLFetcher from './../helpers/graphiQLFetcher.jsx';
 import GraphiQlSearch from './GraphiQlSearch.jsx';
-import { AppContext } from './CustomGraphiQL.jsx';
+import { AppContext } from '../index';
 import GraphiQlHistory from './GraphiQlHistory.jsx';
 import GraphiQlFooter from './GraphiQlFooter.jsx';
 import GraphiQlExport from './GraphiQlExport';

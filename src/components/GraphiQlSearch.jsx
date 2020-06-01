@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { AppContext } from './CustomGraphiQL.jsx';
+import { AppContext } from '../index';
 
 import '../styles/GraphiQlSearch.sass';
 
