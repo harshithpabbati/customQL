@@ -1,6 +1,6 @@
 {
   "name": "customql",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Custom GraphQL IDE",
   "keywords": [
     "react",
@@ -34,7 +34,7 @@
   "bugs": {
     "url": "https://github.com/harshithpabbati/customql/issues"
   },
-  "homepage": "https://github.com/harshithpabbati/customql#readme",
+  "homepage": "https://customql.netlify.app/",
   "browserslist": [
     ">0.2%",
     "not dead",

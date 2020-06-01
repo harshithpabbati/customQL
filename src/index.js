@@ -312,7 +312,7 @@ const reducer = (state = initialState, action) => {
 
 export const AppContext = React.createContext(undefined, undefined);
 
-const CustomQL = ({ endpoints }) => {
+export const CustomQL = ({ endpoints }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   useEffect(() => {
     defaultTabValues = { ...defaultTabValues, route: endpoints[0].route };
